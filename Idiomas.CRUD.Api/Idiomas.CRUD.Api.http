@@ -1,0 +1,6 @@
+@Idiomas.CRUD.Api_HostAddress = http://localhost:5264
+
+GET {{Idiomas.CRUD.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
