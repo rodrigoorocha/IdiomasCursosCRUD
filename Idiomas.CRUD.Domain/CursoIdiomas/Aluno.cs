@@ -10,12 +10,7 @@ namespace Idiomas.CRUD.Domain.CursoIdiomas
 {
     public class Aluno: Entity<Guid>
     {
-        public Aluno(string nome, Cpf cpf, Email email)
-        {
-            Nome = nome;
-            Cpf = cpf;
-            Email = email;
-        }
+      
 
         protected Aluno() { }
 

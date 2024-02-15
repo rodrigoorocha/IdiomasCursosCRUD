@@ -4,11 +4,7 @@ namespace Idiomas.CRUD.Domain.CursoIdiomas
 {
     public class Turma : Entity<Guid>
     {
-        public Turma(string numero, int anoLetivo)
-        {
-            Numero = numero;
-            AnoLetivo = anoLetivo;
-        }
+    
 
         protected Turma() { 
         

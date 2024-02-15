@@ -18,6 +18,7 @@ namespace Idiomas.CRUD.Infraestructure
 
             services.AddScoped(typeof(Repository<>));
             services.AddScoped<IAlunoRepository, AlunoRepository>();
+            services.AddScoped<ITurmaRepository, TurmaRepository>();
 
             return services;
         }

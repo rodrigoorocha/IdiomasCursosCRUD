@@ -1,4 +1,5 @@
-﻿using Idiomas.CRUD.Application.Services;
+﻿using Idiomas.CRUD.Application.Dtos;
+using Idiomas.CRUD.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Idiomas.CRUD.Api.Controllers
@@ -19,6 +20,34 @@ namespace Idiomas.CRUD.Api.Controllers
         {
             var result = await _alunoService.GetAllAsync();
             return Ok(result);
+        }
+
+        [HttpGet("getById")]
+        public async Task<IActionResult> GetById([FromQuery] Guid id)
+        {
+            var aluno = await _alunoService.GetByIdAsync(id);       
+            return Ok(aluno);
+        }
+
+        [HttpDelete("Deletar")]
+        public async Task<IActionResult> Delete([FromQuery] Guid id)
+        {
+            var aluno = await _alunoService.Delete(id);
+            return Ok(aluno);
+        }
+        [HttpPut("Atualizar")]
+        public async Task<IActionResult> Update([FromQuery] Guid id, AlunoDto alunoDto)
+        {
+            var aluno = await _alunoService.Update(id, alunoDto);
+            return Ok(aluno);
+        }
+
+        [HttpPost("Criar")]
+        public async Task<IActionResult> Create([FromBody] AlunoDto alunoDto)
+        {
+           
+            var aluno = await _alunoService.Create(alunoDto);
+            return Ok(aluno);
         }
     }
 }

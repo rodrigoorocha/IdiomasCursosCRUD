@@ -20,8 +20,9 @@ namespace Idiomas.CRUD.Application
         )
         {
             services.AddAutoMapper(typeof(Application.ConfigurationModule).Assembly);
-            services.AddScoped<IAlunoServices, AlunoService > ();
-                       
+            services.AddScoped<IAlunoServices, AlunoService>();
+            services.AddScoped<ITurmaServices, TurmaServices>();
+
 
             services.AddHttpClient();
 

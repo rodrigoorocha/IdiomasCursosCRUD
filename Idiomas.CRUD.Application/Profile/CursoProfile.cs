@@ -5,12 +5,14 @@ using Idiomas.CRUD.Domain.CursoIdiomas;
 
 namespace Idiomas.CRUD.Application.Profile
 {
-    public class AlunoProfile : AutoMapper.Profile
+    public class CursoProfile : AutoMapper.Profile
     {
-        public AlunoProfile()
+        public CursoProfile()
         {
             CreateMap<Aluno, AlunoDto>();
             CreateMap<AlunoDto, Aluno>();
+            CreateMap<Turma, TurmaDto>();
+            CreateMap<TurmaDto, Turma>();
         }
 
     }
