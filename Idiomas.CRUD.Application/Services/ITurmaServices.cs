@@ -9,7 +9,12 @@ namespace Idiomas.CRUD.Application.Services
 {
     public interface ITurmaServices
     {
+        
+
+        Task<TurmaDto> Create(TurmaDto turmaDto);
         Task<IEnumerable<TurmaDto>> GetAllAsync();
-          
+       
+
     }
 }
+

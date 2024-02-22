@@ -8,20 +8,14 @@ using System.Threading.Tasks;
 
 namespace Idiomas.CRUD.Domain.CursoIdiomas
 {
-    public class Aluno: Entity<Guid>
-    {
-      
+    public class Aluno: Entity<int>
+    {     
 
         protected Aluno() { }
-
-        
-
         public string Nome { get; set; }
-        public Cpf Cpf { get; set; }   
+        public Cpf Cpf { get; set; }
         public Email Email { get; set; }
-
-        public Guid TurmaId { get; set; }
-        public Turma Turma { get; set; }
+        public List<Matricula> Matriculas { get; set; } = new List<Matricula>();
 
         public void Update(string nome, Cpf cpf, Email email)
         {
@@ -30,5 +24,7 @@ namespace Idiomas.CRUD.Domain.CursoIdiomas
             Cpf = cpf;
             
         }
+
+       
     }
 }

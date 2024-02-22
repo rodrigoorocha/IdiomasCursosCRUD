@@ -1,16 +1,12 @@
 ﻿using AutoMapper;
 using Idiomas.CRUD.Application.Dtos;
+using Idiomas.CRUD.Domain.CursoIdiomas;
 using Idiomas.CRUD.Domain.CursoIdiomas.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Idiomas.CRUD.Application.Services
 {
     public class TurmaServices : ITurmaServices
-{
+    {
         private readonly ITurmaRepository _turmaRepository;
         private readonly IMapper _mapper;
 
@@ -20,13 +16,14 @@ namespace Idiomas.CRUD.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<TurmaDto>> GetAllAsync()
+        public Task<TurmaDto> Create(TurmaDto turmaDto)
         {
-            var query = await _turmaRepository.GetAll();
+            throw new NotImplementedException();
+        }
 
-            var turmaDto = _mapper.Map<IEnumerable<TurmaDto>>(query);
-            return turmaDto;
-
+        public Task<IEnumerable<TurmaDto>> GetAllAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

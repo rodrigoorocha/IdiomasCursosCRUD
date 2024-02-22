@@ -36,7 +36,7 @@ namespace Idiomas.CRUD.Api.Controllers
             return Ok(aluno);
         }
         [HttpPut("Atualizar")]
-        public async Task<IActionResult> Update([FromQuery] Guid id, AlunoDto alunoDto)
+        public async Task<IActionResult> Update([FromQuery] Guid id, [FromBody] AlunoDto alunoDto)
         {
             var aluno = await _alunoService.Update(id, alunoDto);
             return Ok(aluno);

@@ -1,15 +1,15 @@
 ﻿using Idiomas.CRUD.Application.Dtos;
+using Idiomas.CRUD.Domain.CursoIdiomas;
 
 
 namespace Idiomas.CRUD.Application.Services
 {
     public interface IAlunoServices
     {
-        Task<AlunoDto> Delete(Guid id);
+        
         Task<AlunoDto> Create(AlunoDto alunoDto);
-        Task<IEnumerable<AlunoDto>> GetAllAsync();
-        Task<AlunoDto> GetByIdAsync(Guid id);
-        Task<AlunoDto> Update(Guid id, AlunoDto alunoDto);
+        Task<IEnumerable<TurmaDto>> GetAllAsync();
+
 
 
     }

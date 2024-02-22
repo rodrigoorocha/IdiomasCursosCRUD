@@ -12,11 +12,7 @@ namespace Idiomas.CRUD.Infraestructure.Repository
         {
         }
 
-        public async Task<IEnumerable<Aluno>> GetAllAsyncWithTurma()
-        {
-            var query = await this.Query.Include(x=> x.Turma).ToListAsync();
-            return query;
-        }
+       
 
         public async Task<Aluno> GetAlunoByCPF(string cpf)
         {
@@ -25,9 +21,6 @@ namespace Idiomas.CRUD.Infraestructure.Repository
             return query;
         }
 
-        public Task<Aluno> GetByIdAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

@@ -1,4 +1,4 @@
-﻿using Idiomas.CRUD.Domain.CursoIdiomas;
+﻿ using Idiomas.CRUD.Domain.CursoIdiomas;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,9 +13,11 @@ namespace Idiomas.CRUD.Infraestructure.Mapping
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.AnoLetivo).IsRequired();
 
-            builder.HasMany(x => x.Alunos)
-                .WithOne(x => x.Turma)
-                .HasForeignKey(x => x.TurmaId);
+            builder.HasMany(t => t.Matriculas)
+                   .WithOne(m => m.Turma)
+                   .HasForeignKey(m => m.TurmaId);
+
+
         }
     }
 }

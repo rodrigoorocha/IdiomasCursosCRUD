@@ -9,6 +9,7 @@ namespace Idiomas.CRUD.Domain.CursoIdiomas.Repository
 {
     public interface ITurmaRepository : IRepository<Turma>
     {
+        
 
     }
 }

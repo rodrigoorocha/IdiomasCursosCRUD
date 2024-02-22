@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Idiomas.CRUD.Infraestructure.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Idiomas.CRUD.Infraestructure.Repository
 {
@@ -16,5 +17,7 @@ namespace Idiomas.CRUD.Infraestructure.Repository
         public TurmaRepository(IdiomasContext context) : base(context)
         {
         }
+        
+      
     }
 }
