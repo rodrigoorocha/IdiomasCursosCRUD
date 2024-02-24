@@ -17,7 +17,14 @@ namespace Idiomas.CRUD.Infraestructure.Repository
         public TurmaRepository(IdiomasContext context) : base(context)
         {
         }
-        
-      
+
+        public async Task<IEnumerable<Turma>> GetAllTurmaWithAlunos()
+        {
+            var query = await this.Query
+               .Include(x => x.Matriculas)
+               .ToListAsync();
+
+            return query;
+        }
     }
 }

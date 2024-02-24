@@ -16,38 +16,32 @@ namespace Idiomas.CRUD.Api.Controllers
             _alunoService = alunoService;
         }
         [HttpGet]
-        public async Task<IActionResult> BuscarTodos()
+        public async Task<IActionResult> GetAll()
         {
             var result = await _alunoService.GetAllAsync();
             return Ok(result);
         }
-
-        [HttpGet("getById")]
-        public async Task<IActionResult> GetById([FromQuery] Guid id)
-        {
-            var aluno = await _alunoService.GetByIdAsync(id);       
+              
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create([FromQuery] AlunoInputDto alunoInputDto)
+        {           
+            var aluno = await _alunoService.CreateAsync(alunoInputDto);
             return Ok(aluno);
         }
 
-        [HttpDelete("Deletar")]
-        public async Task<IActionResult> Delete([FromQuery] Guid id)
+        [HttpPut("Update")]
+        public async Task<IActionResult> Update([FromBody] AlunoDto alunoDto)
         {
-            var aluno = await _alunoService.Delete(id);
-            return Ok(aluno);
-        }
-        [HttpPut("Atualizar")]
-        public async Task<IActionResult> Update([FromQuery] Guid id, [FromBody] AlunoDto alunoDto)
-        {
-            var aluno = await _alunoService.Update(id, alunoDto);
+            var aluno = await _alunoService.UpdateAsync(alunoDto);
             return Ok(aluno);
         }
 
-        [HttpPost("Criar")]
-        public async Task<IActionResult> Create([FromBody] AlunoDto alunoDto)
-        {
-           
-            var aluno = await _alunoService.Create(alunoDto);
-            return Ok(aluno);
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete(int id)
+        {         
+
+            var message = _alunoService.DeleteAsync(id);
+            return Ok(message);
         }
     }
 }

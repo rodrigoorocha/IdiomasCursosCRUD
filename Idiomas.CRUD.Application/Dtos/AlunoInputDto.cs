@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Idiomas.CRUD.Application.Dtos
 {
-    public class RequestDto
+    public class AlunoInputDto
     {
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public string Email { get; set; }
-        public Guid TumaId { get; set; }
+        public int? TumaId { get; set; }
     }
 
 }

@@ -17,14 +17,47 @@ namespace Idiomas.CRUD.Application.Services
 
         }
 
-        public Task<AlunoDto> Create(AlunoDto alunoDto)
+        public async Task<IEnumerable<AlunoDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
-        }
+            var query = await _alunoRepository.GetAllAsync();
 
-        public Task<IEnumerable<TurmaDto>> GetAllAsync()
+            var alunoDto = _mapper.Map<IEnumerable<AlunoDto>>(query);
+            return alunoDto;
+        }
+        public async Task<AlunoDto> CreateAsync(AlunoInputDto alunoInputDto)
         {
-            throw new NotImplementedException();
+
+            if (await _alunoRepository.AnyAsync(x => x.Cpf.Numero == alunoInputDto.Cpf))
+                throw new Exception("Já existe um funcionario cadastrado com o mesmo CPF");
+
+            var aluno = _mapper.Map<Aluno>(alunoInputDto);
+            aluno.Validate();
+            await _alunoRepository.SaveAsync(aluno);
+
+            return _mapper.Map<AlunoDto>(aluno);
+        }
+        public async Task<AlunoDto> UpdateAsync(AlunoDto alunoDto)
+        {
+            var aluno = await _alunoRepository.GetAlunoByCPF(alunoDto.Cpf.Numero);
+            if (aluno == null)
+                throw new Exception("Aluno não encontrado");
+
+            _mapper.Map(alunoDto, aluno);
+
+            await _alunoRepository.UpdateAsync(aluno);
+
+            return _mapper.Map<AlunoDto>(aluno);
+        }
+        public async Task<AlunoDto> DeleteAsync(int id)
+        {
+            var aluno = await _alunoRepository.GetByIdAsync(id);         
+
+            if (aluno == null)
+                throw new Exception("Aluno não encontrado");
+         
+            await _alunoRepository.DeleteAsync(aluno.Id);           
+            
+            return _mapper.Map<AlunoDto>(aluno);
         }
     }
 }

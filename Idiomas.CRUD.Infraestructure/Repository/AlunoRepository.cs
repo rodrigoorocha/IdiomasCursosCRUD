@@ -12,15 +12,29 @@ namespace Idiomas.CRUD.Infraestructure.Repository
         {
         }
 
-       
-
-        public async Task<Aluno> GetAlunoByCPF(string cpf)
+        public async Task<IEnumerable<Aluno>> GetAllAlunoWithTurmaMatricula()
         {
-            
-            var query = await this.Query.FirstOrDefaultAsync(x=> x.Cpf.Numero.Equals(cpf));
+            var query = await this.Query
+                .Include(x => x.Matriculas)
+                .ToListAsync();
+
+
+
             return query;
         }
 
-       
+        public async Task<Aluno> GetAlunoByCPF(string cpf)
+        {
+            var query = await this.Query.FirstOrDefaultAsync(x => x.Cpf.Numero.Equals(cpf));
+            return query;
+        }
+
+        public async Task<Aluno> GetAlunoWithTurmaMatricula(string cpf)
+        {
+            var query = this.Query
+                .Where(x => x.Cpf.Numero.Equals(cpf))
+                .Include(x => x.Matriculas);
+            return (Aluno)query;
+        }
     }
 }

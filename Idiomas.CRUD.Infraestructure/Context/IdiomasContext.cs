@@ -1,4 +1,5 @@
-﻿using Idiomas.CRUD.Domain.CursoIdiomas;
+﻿using Idiomas.CRUD.Domain;
+using Idiomas.CRUD.Domain.CursoIdiomas;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace Idiomas.CRUD.Infraestructure.Context
 
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Turma> Turmas { get; set; }
+        public DbSet<Matricula> Matriculas { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseLazyLoadingProxies();

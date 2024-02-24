@@ -26,35 +26,35 @@ namespace Idiomas.CRUD.Api.Controllers
         }
 
         [HttpPost("criarTurma")]
-        public async Task<IActionResult> CriarTurma([FromBody] TurmaDto turmaDto)
+        public async Task<IActionResult> CriarTurma([FromQuery] TurmaDto turmaDto)
         {
-            var turmaCriada = await _turmaServices.Create(turmaDto);
+            var turmaCriada = await _turmaServices.CreateAsync(turmaDto);
             return Ok(turmaCriada);
         }
 
-        [HttpGet("buscarTurmaPorId")]
-        public async Task<IActionResult> BuscarTurmaPorId([FromQuery] Guid id)
-        {
-            var turma = await _turmaServices.GetByIdAsync(id);
+        //[HttpGet("buscarTurmaPorId")]
+        //public async Task<IActionResult> BuscarTurmaPorId([FromQuery] Guid id)
+        //{
+        //    var turma = await _turmaServices.GetByIdAsync(id);
            
-            return Ok(turma);
-        }
+        //    return Ok(turma);
+        //}
 
-        [HttpPut("atualizarTurma")]
-        public async Task<IActionResult> AtualizarTurma([FromBody] Guid id,  TurmaDto turmaDto)
-        {
-            var turmaAtualizada = await _turmaServices.Update(id, turmaDto);
+        //[HttpPut("atualizarTurma")]
+        //public async Task<IActionResult> AtualizarTurma([FromBody] Guid id,  TurmaDto turmaDto)
+        //{
+        //    var turmaAtualizada = await _turmaServices.Update(id, turmaDto);
            
-            return Ok(turmaAtualizada);
-        }
+        //    return Ok(turmaAtualizada);
+        //}
 
-        [HttpDelete("deletarTurma")]
-        public async Task<IActionResult> DeletarTurma([FromBody] Guid id)
-        {
-            var turmaDeletada = await _turmaServices.Delete(id);
+        //[HttpDelete("deletarTurma")]
+        //public async Task<IActionResult> DeletarTurma([FromBody] Guid id)
+        //{
+        //    var turmaDeletada = await _turmaServices.Delete(id);
            
-            return Ok(turmaDeletada);
-        }
+        //    return Ok(turmaDeletada);
+        //}
 
 
 

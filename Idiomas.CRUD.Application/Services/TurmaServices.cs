@@ -16,12 +16,30 @@ namespace Idiomas.CRUD.Application.Services
             _mapper = mapper;
         }
 
-        public Task<TurmaDto> Create(TurmaDto turmaDto)
+        public async Task<TurmaDto> CreateAsync(TurmaDto turmaDto)
+        {
+
+            var turma = _mapper.Map<Turma>(turmaDto);
+            await _turmaRepository.SaveAsync(turma);
+            return _mapper.Map<TurmaDto>(turma);
+
+        }
+
+        public Task DeleteAsync(TurmaDto turmaDto)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<TurmaDto>> GetAllAsync()
+        public async Task<IEnumerable<TurmaDto>> GetAllAsync()
+        {
+            var query = await _turmaRepository.GetAllAsync();
+
+            var turmaDto = _mapper.Map<IEnumerable<TurmaDto>>(query);
+            return turmaDto;
+
+        }
+
+        public Task<TurmaDto> UpdateAsync(TurmaDto turmaDto)
         {
             throw new NotImplementedException();
         }

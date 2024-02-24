@@ -1,6 +1,7 @@
 ﻿using Idiomas.CRUD.Domain.Base;
 using Idiomas.CRUD.Infraestructure.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Idiomas.CRUD.Infraestructure.DataBase
 {
@@ -17,34 +18,49 @@ namespace Idiomas.CRUD.Infraestructure.DataBase
         }
 
 
-        public async Task Delete(T entity)
+        public async Task DeleteAsync(int id)
         {
-            this.Query.Remove(entity);
-            await this.Context.SaveChangesAsync();
+            var entity = await Query.FindAsync(id);
+            Query.Remove(entity);
+            await Context.SaveChangesAsync();
         }
 
-        public  async Task<T> Get(object id)
+        public async Task<T> GetByIdAsync(int id)
         {
-            return await this.Query.FindAsync(id);
+            var query = Query.Find(id);
+            return query;
+
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await this.Query.ToListAsync();
         }
 
-        public async Task Save(T entity)
+        public async Task SaveAsync(T entity)
         {
-            await this.Query.AddAsync(entity);
+           await this.Query.AddAsync(entity);
            await this.Context.SaveChangesAsync();
         }
 
-        public async Task Update(T entity)
+        public async Task UpdateAsync(T entity)
         {
            this.Query.Update(entity);
            await this.Context.SaveChangesAsync();
         }
 
-        
+        public async Task<IEnumerable<T>> FindAllByCriterioAsync(Expression<Func<T, bool>> expression)
+        {
+            return await this.Query.Where(expression).ToListAsync();
+        }
+
+        public async Task<T> FindOneByCriterioAsync(Expression<Func<T, bool>> expression)
+        {
+            return await this.Query.FirstOrDefaultAsync(expression);
+        }
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
+        {
+            return await Query.AnyAsync(expression);
+        }
     }
 }

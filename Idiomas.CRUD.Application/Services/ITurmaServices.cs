@@ -1,9 +1,4 @@
 ﻿using Idiomas.CRUD.Application.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Idiomas.CRUD.Application.Services
 {
@@ -11,10 +6,10 @@ namespace Idiomas.CRUD.Application.Services
     {
         
 
-        Task<TurmaDto> Create(TurmaDto turmaDto);
+        Task<TurmaDto> CreateAsync(TurmaDto turmaDto);
         Task<IEnumerable<TurmaDto>> GetAllAsync();
-       
-
+        Task<TurmaDto> UpdateAsync(TurmaDto turmaDto);
+        Task DeleteAsync(TurmaDto turmaDto);
     }
 }
 

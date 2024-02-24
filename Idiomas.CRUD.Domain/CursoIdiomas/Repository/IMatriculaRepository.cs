@@ -7,11 +7,7 @@ using System.Threading.Tasks;
 
 namespace Idiomas.CRUD.Domain.CursoIdiomas.Repository
 {
-    public interface ITurmaRepository : IRepository<Turma>
+    public interface IMatriculaRepository : IRepository<Matricula>
     {
-        Task<IEnumerable<Turma>> GetAllTurmaWithAlunos();
-
-
-
     }
 }

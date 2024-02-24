@@ -6,10 +6,8 @@ namespace Idiomas.CRUD.Domain.CursoIdiomas
     public class Turma : Entity<int>
     {
     
-
-        protected Turma() { 
-        
-        }
+        //EF
+        protected Turma() {}
         public int Numero { get; set; }
         public int AnoLetivo { get; set; }
         public ICollection<Matricula> Matriculas { get; set; } = new List<Matricula>();
