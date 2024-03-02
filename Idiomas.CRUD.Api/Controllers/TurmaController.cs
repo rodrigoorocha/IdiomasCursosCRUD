@@ -19,8 +19,9 @@ namespace Idiomas.CRUD.Api.Controllers
         }
 
         [HttpGet("buscarTurmas")]
-        public  async Task<IActionResult> BuscaTurmas() {
-            
+        public async Task<IActionResult> BuscaTurmas()
+        {
+
             var turma = await _turmaServices.GetAllAsync();
             return Ok(turma);
         }
@@ -32,29 +33,29 @@ namespace Idiomas.CRUD.Api.Controllers
             return Ok(turmaCriada);
         }
 
-        //[HttpGet("buscarTurmaPorId")]
+        //[HttpGet("buscarturmaporid")]
         //public async Task<IActionResult> BuscarTurmaPorId([FromQuery] Guid id)
         //{
         //    var turma = await _turmaServices.GetByIdAsync(id);
-           
+
         //    return Ok(turma);
         //}
 
-        //[HttpPut("atualizarTurma")]
-        //public async Task<IActionResult> AtualizarTurma([FromBody] Guid id,  TurmaDto turmaDto)
-        //{
-        //    var turmaAtualizada = await _turmaServices.Update(id, turmaDto);
-           
-        //    return Ok(turmaAtualizada);
-        //}
+        [HttpPut("atualizar")]
+        public async Task<IActionResult> AtualizarTurma([FromBody] TurmaDto turmaDTO)
+        {
+            var turmaAtualizada = await _turmaServices.UpdateAsync(turmaDTO);
 
-        //[HttpDelete("deletarTurma")]
-        //public async Task<IActionResult> DeletarTurma([FromBody] Guid id)
-        //{
-        //    var turmaDeletada = await _turmaServices.Delete(id);
-           
-        //    return Ok(turmaDeletada);
-        //}
+            return Ok(turmaAtualizada);
+        }
+
+        [HttpDelete("deletarturma")]
+        public async Task<IActionResult> DeletarTurma([FromBody] int id)
+        {
+            var turmaDeletada = await _turmaServices.DeleteAsync(id);
+
+            return Ok(turmaDeletada);
+        }
 
 
 

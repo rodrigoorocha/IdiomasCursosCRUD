@@ -13,6 +13,6 @@ namespace Idiomas.CRUD.Application.Services
 
         Task<MatriculaDto> CreateAsync(MatriculaDto matriculaDto);
         Task<IEnumerable<MatriculaDto>> GetAllAsync();
-        Task DeleteAsync(int id);
+         Task<MatriculaDto> DeleteAsync(int id);
     }
 }

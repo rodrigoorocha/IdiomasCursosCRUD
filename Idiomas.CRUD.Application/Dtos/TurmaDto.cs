@@ -1,10 +1,4 @@
-﻿using Idiomas.CRUD.Domain;
-using Idiomas.CRUD.Domain.CursoIdiomas;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace Idiomas.CRUD.Application.Dtos
 {
@@ -13,6 +7,8 @@ namespace Idiomas.CRUD.Application.Dtos
         public int? Id { get; set; }
         public string Numero { get; set; }
         public int AnoLetivo { get; set; }
+        [JsonIgnore]
+        public ICollection<MatriculaDto> Matriculas { get; set; } = new List<MatriculaDto>();
 
     }
 }

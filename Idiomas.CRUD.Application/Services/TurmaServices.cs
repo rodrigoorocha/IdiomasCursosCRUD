@@ -25,9 +25,17 @@ namespace Idiomas.CRUD.Application.Services
 
         }
 
-        public Task DeleteAsync(TurmaDto turmaDto)
+        public async Task<TurmaDto> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+           
+            var turma = await _turmaRepository.GetByIdAsync(id);
+
+            if (turma == null)
+                throw new Exception("Turma não encontrada");
+
+            await _turmaRepository.DeleteAsync(turma.Id);
+
+            return _mapper.Map<TurmaDto>(turma);
         }
 
         public async Task<IEnumerable<TurmaDto>> GetAllAsync()
@@ -39,9 +47,17 @@ namespace Idiomas.CRUD.Application.Services
 
         }
 
-        public Task<TurmaDto> UpdateAsync(TurmaDto turmaDto)
+        public async Task<TurmaDto> UpdateAsync(TurmaDto turmaDto)
         {
-            throw new NotImplementedException();
+
+            var turma = await _turmaRepository.GetTurmaById((int)turmaDto.Id);
+
+            if (turma == null)
+                throw new Exception("Turma não encontrada");                      
+                                    
+            await _turmaRepository.UpdateAsync(turma);
+
+            return _mapper.Map<TurmaDto>(turma);
         }
     }
 }

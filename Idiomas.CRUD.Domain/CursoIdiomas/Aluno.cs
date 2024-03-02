@@ -19,5 +19,6 @@ namespace Idiomas.CRUD.Domain.CursoIdiomas
         public void Validate() =>
             new AlunoValidator().ValidateAndThrow(this);
 
+
     }
 }
