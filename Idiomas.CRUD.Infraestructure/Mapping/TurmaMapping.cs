@@ -9,14 +9,11 @@ namespace Idiomas.CRUD.Infraestructure.Mapping
         public void Configure(EntityTypeBuilder<Turma> builder)
         {
             builder.ToTable("Turmas");
-            builder.HasKey(a => a.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.HasKey(a => a.TurmaId);
+            builder.Property(x => x.TurmaId).ValueGeneratedOnAdd();
             builder.Property(x => x.AnoLetivo).IsRequired();
 
-            builder.HasMany(t => t.Matriculas)
-                   .WithOne(m => m.Turma)
-                   .HasForeignKey(m => m.TurmaId);
-
+            
 
         }
     }

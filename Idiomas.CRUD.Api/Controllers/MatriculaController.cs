@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Idiomas.CRUD.Api.Controllers
 {
+    [Route("api/Controller")]
+    [ApiController]
     public class MatriculaController : ControllerBase
     {
         private readonly IMatriculaService _matriculaService; 
@@ -12,23 +14,23 @@ namespace Idiomas.CRUD.Api.Controllers
         {
             _matriculaService = matriculaService;
         }
-        [HttpGet]
+        [HttpGet("Buscar Matricula")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _matriculaService.GetAllAsync();
             return Ok(result);
         }
 
-        [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromQuery] MatriculaDto matriculaDto)
+        [HttpPost("Criar")]
+        public async Task<IActionResult> Create([FromBody] MatriculaDto matriculaDto)
         {
-            var aluno = await _matriculaService.CreateAsync(matriculaDto);
-            return Ok(aluno);
+            var matricula = await _matriculaService.CriarMatriculaAsync(  matriculaDto);
+            return Ok(matricula);
         }
 
    
 
-        [HttpDelete("Delete")]
+        [HttpDelete("Deletar")]
         public async Task<IActionResult> Delete(int id)
         {
 

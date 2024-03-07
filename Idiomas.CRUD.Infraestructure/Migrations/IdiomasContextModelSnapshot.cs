@@ -21,31 +21,46 @@ namespace Idiomas.CRUD.Infraestructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AlunoTurma", b =>
+                {
+                    b.Property<int>("AlunosAlunoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TurmasTurmaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AlunosAlunoId", "TurmasTurmaId");
+
+                    b.HasIndex("TurmasTurmaId");
+
+                    b.ToTable("AlunoTurma");
+                });
+
             modelBuilder.Entity("Idiomas.CRUD.Domain.CursoIdiomas.Aluno", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AlunoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AlunoId"));
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("Id");
+                    b.HasKey("AlunoId");
 
                     b.ToTable("Alunos", (string)null);
                 });
 
             modelBuilder.Entity("Idiomas.CRUD.Domain.CursoIdiomas.Turma", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("TurmaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TurmaId"));
 
                     b.Property<int>("AnoLetivo")
                         .HasColumnType("int");
@@ -53,18 +68,18 @@ namespace Idiomas.CRUD.Infraestructure.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("TurmaId");
 
                     b.ToTable("Turmas", (string)null);
                 });
 
             modelBuilder.Entity("Idiomas.CRUD.Domain.Matricula", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("MatriculaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MatriculaId"));
 
                     b.Property<int>("AlunoId")
                         .HasColumnType("int");
@@ -72,13 +87,28 @@ namespace Idiomas.CRUD.Infraestructure.Migrations
                     b.Property<int>("TurmaId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("MatriculaId");
 
                     b.HasIndex("AlunoId");
 
                     b.HasIndex("TurmaId");
 
                     b.ToTable("Matriculas", (string)null);
+                });
+
+            modelBuilder.Entity("AlunoTurma", b =>
+                {
+                    b.HasOne("Idiomas.CRUD.Domain.CursoIdiomas.Aluno", null)
+                        .WithMany()
+                        .HasForeignKey("AlunosAlunoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Idiomas.CRUD.Domain.CursoIdiomas.Turma", null)
+                        .WithMany()
+                        .HasForeignKey("TurmasTurmaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Idiomas.CRUD.Domain.CursoIdiomas.Aluno", b =>
@@ -129,13 +159,13 @@ namespace Idiomas.CRUD.Infraestructure.Migrations
             modelBuilder.Entity("Idiomas.CRUD.Domain.Matricula", b =>
                 {
                     b.HasOne("Idiomas.CRUD.Domain.CursoIdiomas.Aluno", "Aluno")
-                        .WithMany("Matriculas")
+                        .WithMany()
                         .HasForeignKey("AlunoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Idiomas.CRUD.Domain.CursoIdiomas.Turma", "Turma")
-                        .WithMany("Matriculas")
+                        .WithMany("Matricula")
                         .HasForeignKey("TurmaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -145,14 +175,9 @@ namespace Idiomas.CRUD.Infraestructure.Migrations
                     b.Navigation("Turma");
                 });
 
-            modelBuilder.Entity("Idiomas.CRUD.Domain.CursoIdiomas.Aluno", b =>
-                {
-                    b.Navigation("Matriculas");
-                });
-
             modelBuilder.Entity("Idiomas.CRUD.Domain.CursoIdiomas.Turma", b =>
                 {
-                    b.Navigation("Matriculas");
+                    b.Navigation("Matricula");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,9 +9,9 @@ namespace Idiomas.CRUD.Domain.CursoIdiomas.Repository
         
         
         Task<Aluno> GetAlunoByCPF(string cpf);
-        Task<Aluno> GetAlunoWithTurmaMatricula(string cpf);
+        Task<IQueryable> GetAlunoWithTurmaMatricula(string cpf);
         Task<IEnumerable<Aluno>> GetAllAlunoWithTurmaMatricula();
-
+        Task<IEnumerable<Aluno>> GetAlunosByTurma(int turmaId);
 
 
 

@@ -24,13 +24,13 @@ namespace Idiomas.CRUD.Application.Services
             var alunoDto = _mapper.Map<IEnumerable<AlunoDto>>(query);
             return alunoDto;
         }
-        public async Task<AlunoDto> CreateAsync(AlunoInputDto alunoInputDto)
+        public async Task<AlunoDto> CreateAsync(AlunoDto alunoDto)
         {
 
-            if (await _alunoRepository.AnyAsync(x => x.Cpf.Numero == alunoInputDto.Cpf))
+            if (await _alunoRepository.AnyAsync(x => x.Cpf.Numero == alunoDto.Cpf.Numero))
                 throw new Exception("Já existe um funcionario cadastrado com o mesmo CPF");
 
-            var aluno = _mapper.Map<Aluno>(alunoInputDto);
+            var aluno = _mapper.Map<Aluno>(alunoDto);
             aluno.Validate();
             await _alunoRepository.SaveAsync(aluno);
 
@@ -55,8 +55,16 @@ namespace Idiomas.CRUD.Application.Services
             if (aluno == null)
                 throw new Exception("Aluno não encontrado");
          
-            await _alunoRepository.DeleteAsync(aluno.Id);           
+            await _alunoRepository.DeleteAsync(aluno.AlunoId);           
             
+            return _mapper.Map<AlunoDto>(aluno);
+        }
+
+        public async Task<AlunoDto> GetAlunoWithTurmaMatricula(string cpf)
+        {
+            var aluno = await _alunoRepository.GetAlunoByCPF(cpf);
+            if (aluno == null)
+                throw new Exception("Aluno não encontrado");
             return _mapper.Map<AlunoDto>(aluno);
         }
     }

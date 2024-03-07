@@ -4,13 +4,14 @@ using System.Text.Json.Serialization;
 namespace Idiomas.CRUD.Application.Dtos
 {
     public class AlunoDto
-    {        
+    {
+        [JsonIgnore]
+        public int? AlunoId { get; set; }
         public string Nome { get; set; }
         public Cpf Cpf { get; set; }
         public Email Email { get; set; }
-        public int? TurmaId { get; set; }
         [JsonIgnore]
-        public ICollection<MatriculaDto>? Matriculas { get; set; } = new List<MatriculaDto>();
+        public virtual ICollection<TurmaDto>? TurmasDto { get; set; } = new List<TurmaDto>();
 
     }
 }

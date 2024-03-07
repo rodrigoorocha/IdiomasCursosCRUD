@@ -10,8 +10,8 @@ namespace Idiomas.CRUD.Infraestructure.Mapping
         {
 
             builder.ToTable("Alunos");
-            builder.HasKey(a => a.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.HasKey(a => a.AlunoId);
+            builder.Property(x => x.AlunoId).ValueGeneratedOnAdd();
             builder.Property(x => x.Nome).IsRequired().HasMaxLength(200);
 
             builder.OwnsOne(x => x.Cpf, p =>
@@ -24,9 +24,9 @@ namespace Idiomas.CRUD.Infraestructure.Mapping
                 p.Property(f => f.Valor).HasColumnName("Email").IsRequired().HasMaxLength(1024);
             });
 
-            builder.HasMany(a => a.Matriculas)
-                   .WithOne(m => m.Aluno)
-                   .HasForeignKey(m => m.AlunoId);
+            builder.HasMany(x => x.Turmas).WithMany(x=>x.Alunos);
+
+            
         }
     }
 }

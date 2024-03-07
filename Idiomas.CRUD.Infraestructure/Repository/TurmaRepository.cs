@@ -21,7 +21,7 @@ namespace Idiomas.CRUD.Infraestructure.Repository
         public async Task<IEnumerable<Turma>> GetAllTurmaWithAlunos()
         {
             var query = await this.Query
-               .Include(x => x.Matriculas)
+               .Include(x => x.Matricula)
                .ToListAsync();
 
             return query;
@@ -29,10 +29,14 @@ namespace Idiomas.CRUD.Infraestructure.Repository
 
         public async Task<Turma> GetTurmaById(int id)
         {
-            var query = await this.Query.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            var query = await this.Query.FirstOrDefaultAsync(x => x.TurmaId.Equals(id));
             return query;
         }
 
-       
+        public async Task<Turma> GetTurmaById(int? id)
+        {
+            var query = await this.Query.FirstOrDefaultAsync(x => x.TurmaId.Equals(id));
+            return query;
+        }
     }
 }

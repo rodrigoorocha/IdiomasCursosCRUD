@@ -21,11 +21,18 @@ namespace Idiomas.CRUD.Api.Controllers
             var result = await _alunoService.GetAllAsync();
             return Ok(result);
         }
-              
+        [HttpGet("GetAlunoByCpf")]
+        public async Task<IActionResult> GetAlunoByCpf(string cpf)
+        {
+            var result = await _alunoService.GetAlunoWithTurmaMatricula(cpf);
+            return Ok(result);
+        }
+
+
         [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromQuery] AlunoInputDto alunoInputDto)
+        public async Task<IActionResult> Create([FromBody] AlunoDto alunoDto)
         {           
-            var aluno = await _alunoService.CreateAsync(alunoInputDto);
+            var aluno = await _alunoService.CreateAsync(alunoDto);
             return Ok(aluno);
         }
 

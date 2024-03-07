@@ -27,19 +27,11 @@ namespace Idiomas.CRUD.Api.Controllers
         }
 
         [HttpPost("criarTurma")]
-        public async Task<IActionResult> CriarTurma([FromQuery] TurmaDto turmaDto)
+        public async Task<IActionResult> CriarTurma([FromBody] TurmaDto turmaDto)
         {
             var turmaCriada = await _turmaServices.CreateAsync(turmaDto);
             return Ok(turmaCriada);
-        }
-
-        //[HttpGet("buscarturmaporid")]
-        //public async Task<IActionResult> BuscarTurmaPorId([FromQuery] Guid id)
-        //{
-        //    var turma = await _turmaServices.GetByIdAsync(id);
-
-        //    return Ok(turma);
-        //}
+        }               
 
         [HttpPut("atualizar")]
         public async Task<IActionResult> AtualizarTurma([FromBody] TurmaDto turmaDTO)

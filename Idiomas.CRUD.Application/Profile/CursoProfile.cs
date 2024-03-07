@@ -12,6 +12,10 @@ namespace Idiomas.CRUD.Application.Profile
         {
             CreateMap<AlunoInputDto, Aluno>();
 
+            CreateMap<MatriculaInputDto, Matricula>();
+            CreateMap<Matricula , MatriculaInputDto>();
+
+
             CreateMap<Aluno, AlunoDto>();
             CreateMap<AlunoDto, Aluno>();
             CreateMap<Turma, TurmaDto>();

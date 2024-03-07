@@ -4,6 +4,7 @@ using Idiomas.CRUD.Domain;
 using Idiomas.CRUD.Domain.CursoIdiomas;
 using Idiomas.CRUD.Domain.CursoIdiomas.Repository;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Idiomas.CRUD.Application.Services
 {
@@ -11,53 +12,40 @@ namespace Idiomas.CRUD.Application.Services
     {
         private readonly IMapper _mapper;
         private readonly IMatriculaRepository _matriculaRepository;
+        private readonly ITurmaRepository _turmaRepository;
+        private readonly IAlunoRepository _alunoRepository;
 
         //contrutor da classe MatriculaService
-        public MatriculaService(IMapper mapper, IMatriculaRepository matriculaRepository)
+        public MatriculaService(IMapper mapper, IMatriculaRepository matriculaRepository, ITurmaRepository turmaRepository, IAlunoRepository alunoRepository)
         {
             _matriculaRepository = matriculaRepository;
+            _turmaRepository = turmaRepository;
+            _alunoRepository = alunoRepository;
             _mapper = mapper;
         }
+        
 
-        public async Task<MatriculaDto> CriarMatriculaAsync(int alunoId, int turmaId)
+        public async Task<MatriculaDto> CriarMatriculaAsync(MatriculaDto matriculaDto)
         {
-            // Aqui você pode adicionar lógica de validação ou regras de negócio antes de criar a matrícula
-
-            // Exemplo simples de verificação de existência de aluno e turma
-            var aluno = await dbContext.Alunos.FindAsync(alunoId);
+            var aluno = await _alunoRepository.GetByIdAsync(matriculaDto.AlunoId.Value);
             if (aluno == null)
             {
                 throw new InvalidOperationException("Aluno não encontrado.");
             }
 
-            var turma = await dbContext.Turmas.FindAsync(turmaId);
+            var turma = await _turmaRepository.GetByIdAsync(matriculaDto.TurmaId.Value);
             if (turma == null)
             {
                 throw new InvalidOperationException("Turma não encontrada.");
             }
 
-            // Se a verificação passar, crie a matrícula
-            var matricula = new Matricula
-            {
-                AlunoId = alunoId,
-                TurmaId = turmaId,
-                Aluno = aluno,
-                Turma = turma
-            };
-
-            dbContext.Matriculas.Add(matricula);
-            await dbContext.SaveChangesAsync();
-
-            return matricula;
-        }
-
-
-        public async Task<MatriculaDto> CreateAsync(MatriculaDto matriculaDto)
-        {
             var matricula = _mapper.Map<Matricula>(matriculaDto);
             await _matriculaRepository.SaveAsync(matricula);
             return _mapper.Map<MatriculaDto>(matricula);
+
+           
         }
+        
 
         public async Task<MatriculaDto> DeleteAsync(int id)
         {
@@ -66,7 +54,7 @@ namespace Idiomas.CRUD.Application.Services
             if (matricula == null)
                 throw new Exception("Matricula não encontrada");
 
-            await _matriculaRepository.DeleteAsync(matricula.Id);
+            await _matriculaRepository.DeleteAsync(matricula.MatriculaId);
 
             return _mapper.Map<MatriculaDto>(matricula);
         }
@@ -79,6 +67,6 @@ namespace Idiomas.CRUD.Application.Services
 
         }
 
-       
+        
     }
 }

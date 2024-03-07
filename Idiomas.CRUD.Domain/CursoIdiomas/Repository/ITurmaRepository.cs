@@ -6,7 +6,6 @@ namespace Idiomas.CRUD.Domain.CursoIdiomas.Repository
     {
         Task<IEnumerable<Turma>> GetAllTurmaWithAlunos();
         Task<Turma> GetTurmaById(int id);
-
-
+        Task<Turma> GetTurmaById(int? id);
     }
 }
