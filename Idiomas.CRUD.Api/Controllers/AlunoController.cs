@@ -30,15 +30,16 @@ namespace Idiomas.CRUD.Api.Controllers
 
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromBody] AlunoDto alunoDto)
+        public async Task<IActionResult> Create([FromBody] AlunoDto alunoCreateDto)
         {           
-            var aluno = await _alunoService.CreateAsync(alunoDto);
+            var aluno = await _alunoService.CreateAsync(alunoCreateDto);
             return Ok(aluno);
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> Update([FromBody] AlunoDto alunoDto)
+        public async Task<IActionResult> Update(int id, AlunoDto alunoDto)
         {
+            alunoDto.AlunoId = id;
             var aluno = await _alunoService.UpdateAsync(alunoDto);
             return Ok(aluno);
         }
@@ -47,7 +48,7 @@ namespace Idiomas.CRUD.Api.Controllers
         public async Task<IActionResult> Delete(int id)
         {         
 
-            var message = _alunoService.DeleteAsync(id);
+            var message = await _alunoService.DeleteAsync(id);
             return Ok(message);
         }
     }

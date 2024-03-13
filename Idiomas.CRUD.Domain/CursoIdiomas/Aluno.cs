@@ -14,6 +14,7 @@ namespace Idiomas.CRUD.Domain.CursoIdiomas
         public Cpf Cpf { get; set; }
         public Email Email { get; set; }
         public virtual ICollection<Turma> Turmas { get; set; } = new List<Turma>();
+        
         public void Validate() =>
             new AlunoValidator().ValidateAndThrow(this);
 

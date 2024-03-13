@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Idiomas.CRUD.Domain", "Idio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Idiomas.CRUD.Infraestructure", "Idiomas.CRUD.Infraestructure\Idiomas.CRUD.Infraestructure.csproj", "{0EA91043-9B57-4E02-B34E-9ABEB48540F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Idiomas.CRUD.Web", "Idiomas.CRUD.Web\Idiomas.CRUD.Web.csproj", "{2CF9A7E1-D10E-44F5-98F3-B6DAA18FF889}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0EA91043-9B57-4E02-B34E-9ABEB48540F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EA91043-9B57-4E02-B34E-9ABEB48540F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EA91043-9B57-4E02-B34E-9ABEB48540F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CF9A7E1-D10E-44F5-98F3-B6DAA18FF889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CF9A7E1-D10E-44F5-98F3-B6DAA18FF889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CF9A7E1-D10E-44F5-98F3-B6DAA18FF889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CF9A7E1-D10E-44F5-98F3-B6DAA18FF889}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

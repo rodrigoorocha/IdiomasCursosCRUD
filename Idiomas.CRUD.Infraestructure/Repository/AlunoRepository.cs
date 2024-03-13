@@ -15,10 +15,12 @@ namespace Idiomas.CRUD.Infraestructure.Repository
 
         public async Task<IEnumerable<Aluno>> GetAllAlunoWithTurmaMatricula()
         {
-            var query = await this.Query
-                .Include(x=>x.Turmas)
-                .ToListAsync();
-            return query;
+
+            var alunosComTurmas =  Query
+               .Include(aluno => aluno.Turmas)
+               .ToList();
+
+            return alunosComTurmas;
         }
 
         public async Task<Aluno> GetAlunoByCPF(string cpf)

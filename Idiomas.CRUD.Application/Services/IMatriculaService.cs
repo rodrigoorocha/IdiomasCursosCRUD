@@ -11,9 +11,9 @@ namespace Idiomas.CRUD.Application.Services
     public interface IMatriculaService 
     {
 
-        Task<MatriculaDto> CriarMatriculaAsync( MatriculaDto matriculaDto);
+        Task<MatriculaDto> CriarMatriculaAsync(MatriculaInputDto matriculaDto);
         Task<IEnumerable<MatriculaDto>> GetAllAsync();
-         Task<MatriculaDto> DeleteAsync(int id);
+        Task<MatriculaDto> DeleteAsync(int id);
         
     }
 }

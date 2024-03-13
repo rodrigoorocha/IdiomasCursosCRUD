@@ -9,6 +9,7 @@ namespace Idiomas.CRUD.Domain.Base
         Task DeleteAsync(int id);
         Task UpdateAsync(T entity);
         Task<T> GetByIdAsync(int id);
+        Task<IEnumerable<T>> GetByIdsAsync(List<int> ids);
         Task<IEnumerable<T>> GetAllAsync();
         Task<IEnumerable<T>> FindAllByCriterioAsync(Expression<Func<T, bool>> expression);
         Task<T> FindOneByCriterioAsync(Expression<Func<T, bool>> expression);

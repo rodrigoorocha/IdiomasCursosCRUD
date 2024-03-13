@@ -13,8 +13,10 @@ namespace Idiomas.CRUD.Infraestructure.Mapping
             builder.Property(x => x.TurmaId).ValueGeneratedOnAdd();
             builder.Property(x => x.AnoLetivo).IsRequired();
 
-            
 
+            builder.HasMany(x => x.Alunos)
+                 .WithMany(x => x.Turmas)
+                 .UsingEntity(j => j.ToTable("AlunoTurma"));
         }
     }
 }

@@ -24,9 +24,23 @@ namespace Idiomas.CRUD.Infraestructure.Mapping
                 p.Property(f => f.Valor).HasColumnName("Email").IsRequired().HasMaxLength(1024);
             });
 
-            builder.HasMany(x => x.Turmas).WithMany(x=>x.Alunos);
+            builder.HasMany(x => x.Turmas)
+                  .WithMany(x => x.Alunos)
+                  .UsingEntity(j => j.ToTable("AlunoTurma"));
 
-            
+            builder.HasMany(x => x.Turmas)
+                   .WithMany(x => x.Alunos)
+                   .UsingEntity<Dictionary<string, object>>(
+                       "AlunoTurma",
+                       j => j.HasOne<Turma>().WithMany().HasForeignKey("TurmaId"),
+                       j => j.HasOne<Aluno>().WithMany().HasForeignKey("AlunoId"),
+                       j =>
+                       {
+                           j.HasKey("AlunoId", "TurmaId");
+                           j.HasOne<Aluno>().WithMany().OnDelete(DeleteBehavior.Cascade);
+                       });
+
+
         }
     }
 }

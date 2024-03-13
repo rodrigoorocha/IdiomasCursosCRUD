@@ -25,8 +25,9 @@ namespace Idiomas.CRUD.Application.Services
         }
         
 
-        public async Task<MatriculaDto> CriarMatriculaAsync(MatriculaDto matriculaDto)
+        public async Task<MatriculaDto> CriarMatriculaAsync(MatriculaInputDto matriculaDto)
         {
+            
             var aluno = await _alunoRepository.GetByIdAsync(matriculaDto.AlunoId.Value);
             if (aluno == null)
             {
@@ -41,6 +42,8 @@ namespace Idiomas.CRUD.Application.Services
 
             var matricula = _mapper.Map<Matricula>(matriculaDto);
             await _matriculaRepository.SaveAsync(matricula);
+
+
             return _mapper.Map<MatriculaDto>(matricula);
 
            

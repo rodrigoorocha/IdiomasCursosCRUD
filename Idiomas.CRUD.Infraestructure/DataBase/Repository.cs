@@ -27,9 +27,27 @@ namespace Idiomas.CRUD.Infraestructure.DataBase
 
         public async Task<T> GetByIdAsync(int id)
         {
-            var query = Query.Find(id);
+            var query = await Query.FindAsync(id);
             return query;
 
+        }
+
+        public async Task<IEnumerable<T>> GetByIdsAsync(List<int> ids) 
+        {
+
+            List<T> entities = new List<T>();
+
+            foreach (int id in ids)
+            {
+                var entity = await Query.FindAsync(id);
+
+                if (entity != null)
+                {
+                    entities.Add(entity);
+                }
+            }
+
+            return entities;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()

@@ -22,9 +22,10 @@ namespace Idiomas.CRUD.Api.Controllers
         }
 
         [HttpPost("Criar")]
-        public async Task<IActionResult> Create([FromBody] MatriculaDto matriculaDto)
+        public async Task<IActionResult> Create([FromBody] MatriculaInputDto matriculaInputDto)
         {
-            var matricula = await _matriculaService.CriarMatriculaAsync(  matriculaDto);
+                        
+            var matricula = await _matriculaService.CriarMatriculaAsync(matriculaInputDto);
             return Ok(matricula);
         }
 
@@ -34,7 +35,7 @@ namespace Idiomas.CRUD.Api.Controllers
         public async Task<IActionResult> Delete(int id)
         {
 
-            var message = _matriculaService.DeleteAsync(id);
+            var message = await _matriculaService.DeleteAsync(id);
             return Ok(message);
         }
     }

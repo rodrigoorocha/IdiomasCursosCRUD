@@ -1,5 +1,4 @@
-﻿
-using Idiomas.CRUD.Domain.CursoIdiomas;
+﻿using System.Text.Json.Serialization;
 
 namespace Idiomas.CRUD.Application.Dtos
 {
@@ -8,7 +7,7 @@ namespace Idiomas.CRUD.Application.Dtos
         public int? MatriculaId { get; set; }
         public int? AlunoId { get; set; }
         public int? TurmaId { get; set; }
-        public virtual Aluno Aluno { get; set; }
-        public virtual Turma Turma { get; set; }
+        public virtual AlunoDto Aluno { get; set; }    
+        public virtual TurmaDto Turma { get; set; }
     }
 }

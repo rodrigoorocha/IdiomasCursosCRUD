@@ -7,7 +7,7 @@ namespace Idiomas.CRUD.Application.Services
     public interface IAlunoServices
     {
         
-        Task<AlunoDto> CreateAsync(AlunoDto alunoDto);
+        Task<AlunoDto> CreateAsync(AlunoDto alunoCreateDto);
         Task<AlunoDto> UpdateAsync(AlunoDto alunoDto);
         Task<IEnumerable<AlunoDto>> GetAllAsync();
         Task<AlunoDto> DeleteAsync(int id);
