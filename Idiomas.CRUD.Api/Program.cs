@@ -1,7 +1,5 @@
 using Idiomas.CRUD.Application;
 using Idiomas.CRUD.Infraestructure;
-using Microsoft.AspNetCore.Localization;
-using System.Globalization;
 
 namespace Idiomas.CRUD.Api
 {

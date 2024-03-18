@@ -33,7 +33,7 @@ namespace Idiomas.CRUD.Application.Services
             if (turma == null)
                 throw new Exception("Turma não encontrada");
 
-            await _turmaRepository.DeleteAsync(turma.TurmaId);
+            await _turmaRepository.DeleteAsync(turma.Id);
 
             return _mapper.Map<TurmaDto>(turma);
         }
@@ -50,7 +50,7 @@ namespace Idiomas.CRUD.Application.Services
         public async Task<TurmaDto> UpdateAsync(TurmaDto turmaDto)
         {
         
-            var turma = await _turmaRepository.GetTurmaById((int)turmaDto.TurmaId);
+            var turma = await _turmaRepository.GetTurmaById((int)turmaDto.Id);
 
             if (turma == null)
                 throw new Exception("Turma não encontrada");                      

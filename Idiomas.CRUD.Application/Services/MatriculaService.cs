@@ -57,7 +57,7 @@ namespace Idiomas.CRUD.Application.Services
             if (matricula == null)
                 throw new Exception("Matricula não encontrada");
 
-            await _matriculaRepository.DeleteAsync(matricula.MatriculaId);
+            await _matriculaRepository.DeleteAsync(matricula.Id);
 
             return _mapper.Map<MatriculaDto>(matricula);
         }

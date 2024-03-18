@@ -6,7 +6,7 @@ namespace Idiomas.CRUD.Application.Dtos
     public class AlunoDto
     {
         [JsonIgnore]
-        public int? AlunoId { get; set; } = null;
+        public int? Id { get; set; } = null;
         public string Nome { get; set; }
         public Cpf Cpf { get; set; }
         public Email Email { get; set; }

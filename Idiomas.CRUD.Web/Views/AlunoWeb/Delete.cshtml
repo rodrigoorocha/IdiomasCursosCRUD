@@ -1,4 +1,4 @@
-﻿@model Idiomas.CRUD.Domain.CursoIdiomas.Aluno
+﻿@model Idiomas.CRUD.Application.ViewModel.AlunoViewModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -13,14 +13,24 @@
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Nome)
+            @Html.DisplayNameFor(model => model.Nome)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
+            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayFor(model => model.Email.ToString())
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cpf)
+            @Html.DisplayFor(model => model.Cpf.ToString())
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TurmasViewsModel)
+            @Html.DisplayFor(model => model.TurmasViewsModel.ToString())
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="AlunoId" />
+        <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

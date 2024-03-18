@@ -1,12 +1,9 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using Idiomas.CRUD.Domain.Base;
 
 namespace Idiomas.CRUD.Domain.CursoIdiomas
 {
-    public class Turma 
+    public class Turma : Entity<int>
     {
-        [Key]   
-        public int TurmaId { get; set; }
         public int Numero { get; set; }
         public int AnoLetivo { get; set; }
             

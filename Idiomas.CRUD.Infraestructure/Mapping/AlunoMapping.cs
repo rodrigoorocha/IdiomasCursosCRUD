@@ -10,8 +10,8 @@ namespace Idiomas.CRUD.Infraestructure.Mapping
         {
 
             builder.ToTable("Alunos");
-            builder.HasKey(a => a.AlunoId);
-            builder.Property(x => x.AlunoId).ValueGeneratedOnAdd();
+            builder.HasKey(a => a.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.Nome).IsRequired().HasMaxLength(200);
 
             builder.OwnsOne(x => x.Cpf, p =>
@@ -24,23 +24,10 @@ namespace Idiomas.CRUD.Infraestructure.Mapping
                 p.Property(f => f.Valor).HasColumnName("Email").IsRequired().HasMaxLength(1024);
             });
 
-            builder.HasMany(x => x.Turmas)
-                  .WithMany(x => x.Alunos)
-                  .UsingEntity(j => j.ToTable("AlunoTurma"));
-
-            builder.HasMany(x => x.Turmas)
-                   .WithMany(x => x.Alunos)
-                   .UsingEntity<Dictionary<string, object>>(
-                       "AlunoTurma",
-                       j => j.HasOne<Turma>().WithMany().HasForeignKey("TurmaId"),
-                       j => j.HasOne<Aluno>().WithMany().HasForeignKey("AlunoId"),
-                       j =>
-                       {
-                           j.HasKey("AlunoId", "TurmaId");
-                           j.HasOne<Aluno>().WithMany().OnDelete(DeleteBehavior.Cascade);
-                       });
-
-
+            
+            builder
+                .HasMany(aluno => aluno.Turmas)
+                .WithMany(turma => turma.Alunos);
         }
     }
 }

@@ -16,9 +16,9 @@ namespace Idiomas.CRUD.Infraestructure.Repository
         public async Task<IEnumerable<Aluno>> GetAllAlunoWithTurmaMatricula()
         {
 
-            var alunosComTurmas =  Query
+            var alunosComTurmas = await Query
                .Include(aluno => aluno.Turmas)
-               .ToList();
+               .ToListAsync();
 
             return alunosComTurmas;
         }
@@ -39,8 +39,8 @@ namespace Idiomas.CRUD.Infraestructure.Repository
             //return alunosNaTurma;
 
             var alunosNaTurma = await (from aluno in Query
-                                       join matricula in Context.Set<Matricula>() on aluno.AlunoId equals matricula.AlunoId
-                                       join turma in Context.Set<Turma>() on matricula.TurmaId equals turma.TurmaId
+                                       join matricula in Context.Set<Matricula>() on aluno.Id equals matricula.AlunoId
+                                       join turma in Context.Set<Turma>() on matricula.TurmaId equals turma.Id
                                        where matricula.TurmaId == turmaId
                                        select new
                                        {

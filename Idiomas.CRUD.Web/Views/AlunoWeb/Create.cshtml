@@ -1,4 +1,4 @@
-﻿@model Idiomas.CRUD.Domain.CursoIdiomas.Aluno
+﻿@model Idiomas.CRUD.Application.ViewModel.AlunoViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -18,6 +18,27 @@
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cpf" class="control-label"></label>
+                <input asp-for="Cpf" class="form-control" />
+                <span asp-validation-for="Cpf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TurmasViewsModel" class="control-label">Turmas:</label>
+                <select asp-for="TurmasViewsModel" class="form-control" multiple>
+                    @foreach (var turma in Model.TurmasViewsModel)
+                    {
+                        <option value="@turma.TurmaId">@turma.Numero - @turma.AnoLetivo</option>
+                    }
+                </select>
+                <span asp-validation-for="TurmasViewsModel" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -29,5 +50,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

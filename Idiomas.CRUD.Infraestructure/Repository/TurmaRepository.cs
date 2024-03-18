@@ -29,13 +29,13 @@ namespace Idiomas.CRUD.Infraestructure.Repository
 
         public async Task<Turma> GetTurmaById(int id)
         {
-            var query = await this.Query.FirstOrDefaultAsync(x => x.TurmaId.Equals(id));
+            var query = await this.Query.FirstOrDefaultAsync(x => x.Id.Equals(id));
             return query;
         }
 
         public async Task<Turma> GetTurmaById(int? id)
         {
-            var query = await this.Query.FirstOrDefaultAsync(x => x.TurmaId.Equals(id));
+            var query = await this.Query.FirstOrDefaultAsync(x => x.Id.Equals(id));
             return query;
         }
     }

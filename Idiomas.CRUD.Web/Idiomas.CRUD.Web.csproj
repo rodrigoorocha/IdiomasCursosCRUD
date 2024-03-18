@@ -21,9 +21,4 @@
     <ProjectReference Include="..\Idiomas.CRUD.Infraestructure\Idiomas.CRUD.Infraestructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-    <Folder Include="Views\Idiomas\" />
-  </ItemGroup>
-
 </Project>

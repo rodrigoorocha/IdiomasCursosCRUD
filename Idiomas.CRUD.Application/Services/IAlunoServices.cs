@@ -12,6 +12,7 @@ namespace Idiomas.CRUD.Application.Services
         Task<IEnumerable<AlunoDto>> GetAllAsync();
         Task<AlunoDto> DeleteAsync(int id);
         Task<AlunoDto> GetAlunoWithTurmaMatricula(string cpf);
+        Task<AlunoDto> GetById(int Id);
 
     }
 }

@@ -9,11 +9,13 @@ namespace Idiomas.CRUD.Infraestructure.Mapping
         public void Configure(EntityTypeBuilder<Matricula> builder)
         {
             builder.ToTable("Matriculas");
-            builder.HasKey(a => a.MatriculaId);
-            builder.Property(x => x.MatriculaId).ValueGeneratedOnAdd();
+            builder.HasKey(a => a.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
-;           
-                  
+;           builder.HasOne(x => x.Aluno);
+            builder.HasOne(x => x.Turma);
+
+
         }
     }
 }

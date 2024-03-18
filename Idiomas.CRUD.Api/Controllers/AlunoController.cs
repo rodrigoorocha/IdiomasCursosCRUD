@@ -39,7 +39,7 @@ namespace Idiomas.CRUD.Api.Controllers
         [HttpPut("Update")]
         public async Task<IActionResult> Update(int id, AlunoDto alunoDto)
         {
-            alunoDto.AlunoId = id;
+            alunoDto.Id = id;
             var aluno = await _alunoService.UpdateAsync(alunoDto);
             return Ok(aluno);
         }

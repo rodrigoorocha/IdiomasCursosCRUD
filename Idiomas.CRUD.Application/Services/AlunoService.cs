@@ -2,8 +2,7 @@
 using Idiomas.CRUD.Application.Dtos;
 using Idiomas.CRUD.Domain.CursoIdiomas;
 using Idiomas.CRUD.Domain.CursoIdiomas.Repository;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
+
 
 namespace Idiomas.CRUD.Application.Services
 {
@@ -23,12 +22,7 @@ namespace Idiomas.CRUD.Application.Services
 
         public async Task<IEnumerable<AlunoDto>> GetAllAsync()
         {
-           
-            var turmas = await _turmaRepository.GetAllAsync();
-
-           
-
-            var query = await _alunoRepository.GetAllAsync();
+            var query = await _alunoRepository.GetAllAlunoWithTurmaMatricula();
             var alunoDto = _mapper.Map<IEnumerable<AlunoDto>>(query);
             return alunoDto;
         }
@@ -37,21 +31,21 @@ namespace Idiomas.CRUD.Application.Services
             if (await _alunoRepository.AnyAsync(x => x.Cpf.Numero == alunoCreateDto.Cpf.Numero))
                 throw new Exception("Já existe um funcionário cadastrado com o mesmo CPF");
 
-            var turmaIds = alunoCreateDto.TurmasDto.Select(turma => turma.TurmaId.Value).ToList();
+            var turmaIds = alunoCreateDto.TurmasDto.Select(turma => turma.Id.Value).ToList();
             var turmas = await _turmaRepository.GetByIdsAsync(turmaIds);
 
             foreach (var turmaDto in alunoCreateDto.TurmasDto)
             {
-                var turma = turmas.FirstOrDefault(t => t.TurmaId == turmaDto.TurmaId);
+                var turma = turmas.FirstOrDefault(t => t.Id == turmaDto.Id);
 
                 if (turma == null)
                 {
-                    throw new Exception($"A turma com o ID {turmaDto.TurmaId} não foi encontrada no banco de dados.");
+                    throw new Exception($"A turma com o ID {turmaDto.Id} não foi encontrada no banco de dados.");
                 }
 
                 if (turma.Numero != turmaDto.Numero || turma.AnoLetivo != turmaDto.AnoLetivo)
                 {
-                    throw new Exception($"As informações da turma com o ID {turmaDto.TurmaId} não correspondem às informações no banco de dados.");
+                    throw new Exception($"As informações da turma com o ID {turmaDto.Id} não correspondem às informações no banco de dados.");
                 }
 
                 if (turma.Alunos.Count() >= 5)
@@ -77,21 +71,21 @@ namespace Idiomas.CRUD.Application.Services
                 throw new Exception("Aluno não encontrado");
 
 
-            var turmaIds = alunoDto.TurmasDto.Select(turma => turma.TurmaId.Value).ToList();
+            var turmaIds = alunoDto.TurmasDto.Select(turma => turma.Id.Value).ToList();
             var turmas = await _turmaRepository.GetByIdsAsync(turmaIds);
 
             foreach (var turmaDto in alunoDto.TurmasDto)
             {
-                var turma = turmas.FirstOrDefault(t => t.TurmaId == turmaDto.TurmaId);
+                var turma = turmas.FirstOrDefault(t => t.Id == turmaDto.Id);
 
                 if (turma == null)
                 {
-                    throw new Exception($"A turma com o ID {turmaDto.TurmaId} não foi encontrada no banco de dados.");
+                    throw new Exception($"A turma com o ID {turmaDto.Id} não foi encontrada no banco de dados.");
                 }
 
                 if (turma.Numero != turmaDto.Numero || turma.AnoLetivo != turmaDto.AnoLetivo)
                 {
-                    throw new Exception($"As informações da turma com o ID {turmaDto.TurmaId} não correspondem às informações no banco de dados.");
+                    throw new Exception($"As informações da turma com o ID {turmaDto.Id} não correspondem às informações no banco de dados.");
                 }
 
                 if (turma.Alunos.Count() >= 5)
@@ -113,7 +107,7 @@ namespace Idiomas.CRUD.Application.Services
             if (aluno == null)
                 throw new Exception("Aluno não encontrado");
                         
-            await _alunoRepository.DeleteAsync(aluno.AlunoId);           
+            await _alunoRepository.DeleteAsync(aluno.Id);           
             
             return _mapper.Map<AlunoDto>(aluno);
         }
@@ -127,7 +121,7 @@ namespace Idiomas.CRUD.Application.Services
             
                 var alunoDto = new AlunoDto
                 {
-                    AlunoId = aluno.AlunoId,
+                    Id = aluno.Id,
                     Nome = aluno.Nome,
                     Cpf = aluno.Cpf,
                     Email = aluno.Email
@@ -138,7 +132,7 @@ namespace Idiomas.CRUD.Application.Services
                 {
                     var turmaDto = new TurmaDto
                     {
-                        TurmaId = turma.TurmaId,
+                        Id = turma.Id,
                         Numero = turma.Numero,
                         AnoLetivo = turma.AnoLetivo,
                     };
@@ -148,6 +142,12 @@ namespace Idiomas.CRUD.Application.Services
                 return alunoDto;
             
 
+        }
+
+        public async Task<AlunoDto> GetById(int id)
+        {
+            var aluno = await _alunoRepository.GetByIdAsync(id);               
+            return _mapper.Map<AlunoDto>(aluno);
         }
     }
 }
